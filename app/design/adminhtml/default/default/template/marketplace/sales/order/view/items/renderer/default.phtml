@@ -1,0 +1,40 @@
+<?php 
+$_item = $this->getItem();
+$adminCommision = $this->getAdminComission(); 
+$sellerItemAmount = $this->getSellerItemAmount();
+?>
+<tr class="border">
+		<td>
+			<div id="order_item_<?php echo $_item->getId() ?>" class="item-container">
+				<div class="item-text">
+					<h5 class="title"><span id="order_item_<?php echo $_item->getId() ?>_title"><?php echo $_item->getName() ?></span></h5>
+					<div><strong>SKU:</strong> <?php echo $_item->getSku() ?></div>
+				</div>
+			</div>
+		</td>
+		<td class="a-right"><span class="price"><?php echo  Mage::registry('current_order')->formatPrice($adminCommision); ?></span></td>
+		<td class="a-right"><span class="price"><?php echo  Mage::registry('current_order')->formatPrice($sellerItemAmount) ?></span></td>
+		<td class="a-right"><span class="price"><?php echo  Mage::registry('current_order')->formatPrice($_item->getOriginalPrice()) ?></span></td>
+		<td>
+			<table cellspacing="0" class="qty-table">
+				<tbody>
+					<?php
+					if ($_item->getQtyOrdered() > 0):
+						echo '<tr><td>Ordered </td><td><strong>' . intval($_item->getQtyOrdered()) . '</strong></td></tr>';
+					endif;
+					if ($_item->getQtyInvoiced() > 0):
+						echo '<tr><td>Invoiced </td><td><strong>' . intval($_item->getQtyInvoiced()) . '</strong></td></tr>';
+					endif;
+					if ($_item->getQtyShipped() > 0):
+						echo '<tr><td>Shipped </td><td><strong>' . intval($_item->getQtyShipped()) . '</strong></td></tr>';
+					endif;
+					?>       
+				</tbody>
+			</table>
+		</td>
+		<td class="a-right last">
+			<span class="price">
+				<?php echo Mage::registry('current_order')->formatPrice(($_item->getPriceInclTax() * $_item->getQtyOrdered())); ?>
+			</span>    
+		</td>
+</tr>

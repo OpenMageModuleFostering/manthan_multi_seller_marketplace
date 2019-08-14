@@ -1,0 +1,130 @@
+<div class="account-create">
+    <div class="page-title">
+        <h1><?php echo $this->__('Become Seller') ?></h1>
+    </div>
+	<?php $sellerData = Mage::getSingleton('core/session')->getSellerData(); ?>
+    <form action="<?php echo $this->getUrl('marketplace/seller/save') ?>" method="post" id="seller-register-form">
+        <div class="fieldset">
+            <h2 class="legend"><?php echo $this->__('Personal Information') ?></h2>
+            <ul class="form-list">
+                <li class="fields">
+                    <div class="customer-name">
+						<div class="field name-firstname">
+							<label for="firstname" class="required"><em>*</em>First Name</label>
+							<div class="input-box">
+								<input type="text" id="firstname" name="firstname" value="<?php echo $sellerData['firstname'] ?>" title="First Name" maxlength="255" class="input-text required-entry">
+							</div>
+						</div>
+						<div class="field name-lastname">
+							<label for="lastname" class="required"><em>*</em>Last Name</label>
+							<div class="input-box">
+								<input type="text" id="lastname" name="lastname" value="<?php echo $sellerData['lastname']; ?>" title="Last Name" maxlength="255" class="input-text required-entry">
+							</div>
+						</div>
+					</div>
+                </li>
+                <li>
+                    <label for="email_address" class="required"><em>*</em>Email Address</label>
+                    <div class="input-box">
+                        <input type="text" name="email" id="email_address" value="<?php echo $sellerData['email']; ?>" title="Email Address" class="input-text validate-email required-entry">
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="fieldset">
+            <h2 class="legend"><?php echo $this->__('Shop Information') ?></h2>
+            <ul class="form-list">
+                <li class="fields">
+                    <div class="field">
+                        <label for="shop_name" class="required"><em>*</em><?php echo $this->__('Shop name') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="shop_name" id="shop_name" value="<?php echo $sellerData['shop_name']; ?>" title="<?php echo $this->__('Shop Name') ?>" class="input-text required-entry" />
+                        </div>
+                    </div>
+                </li>
+				<li class="fields">
+                    <div class="field">
+                        <label for="shop_description" class="required"><em>*</em><?php echo $this->__('Shop Description(about shop)') ?></label>
+                        <div>
+                            <textarea name="shop_description" class="input-text required-entry" id="shop_description" title="<?php echo $this->__('About Shop') ?>"><?php echo $sellerData['shop_description'] ?></textarea>
+                        </div>
+                    </div>
+                </li>
+				<li class="fields">
+                    <div class="field">
+                        <label for="shop_url" class="required"><em>*</em><?php echo $this->__('Shop Url') ?></label>
+                        <div>
+							<input type="text" name="shop_url" id="shop_url" value="<?php echo $sellerData['shop_url']; ?>" title="<?php echo $this->__('Shop Url') ?>" class="input-text required-entry validate-xml-identifier" />
+							<small><?php echo $this->__('Example: shop1-url') ?></small>
+						</div>
+                    </div>
+                </li>
+				<li class="fields">
+                    <div class="field">
+                        <label for="telephone" class="required"><em>*</em><?php echo $this->__('Telephone') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="telephone" id="telephone" title="<?php echo $this->__('Telephone') ?>" value="<?php echo $sellerData['telephone'] ?>" class="input-text required-entry" />
+                        </div>
+                    </div>
+                </li>
+				<li class="fields">
+					<div class="field name-country">
+						<label for="country" class="required"><em>*</em><?php echo $this->__('Country'); ?></label>
+						<div class="input-box">
+							<select id="country" name="country" title="<?php echo $this->__('Country'); ?>" class="input-text required-entry validate-select" >
+								<?php $countryList = $this->getCountryList(); ?>
+								<?php foreach($countryList as $key => $value): ?>
+								<option value="<?php echo $key; ?>" <?php echo ($sellerData['country'] == $key ? 'selected': ''); ?>><?php echo $value; ?></option>
+								<?php endforeach; ?>
+							</select>
+						</div>
+					</div>
+				</li>
+				<li class="fields">
+                    <div class="field">
+                        <label for="telephone" class="required"><em>*</em><?php echo $this->__('Postcode') ?></label>
+                        <div class="input-box">
+                            <input class="input-text validate-postcode required-entry" type="text" id="postcode" name="postcode" value="<?php echo $sellerData['postcode'] ?>">
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="fieldset">
+            <h2 class="legend"><?php echo $this->__('Login Information') ?></h2>
+            <ul class="form-list">
+				<li class="fields">
+                    <div class="field">
+                        <label for="zip" class="required"><em>*</em><?php echo $this->__('Username') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="username" title="<?php echo $this->__('Username') ?>" id="username" class="input-text required-entry" value="<?php echo $sellerData['username'] ?>" />
+                        </div>
+                    </div>
+                </li>
+                <li class="fields">
+                    <div class="field">
+                        <label for="password" class="required"><em>*</em><?php echo $this->__('Password') ?></label>
+                        <div class="input-box">
+                            <input type="password" name="password" id="password" title="<?php echo $this->__('Password') ?>" class="input-text required-entry validate-password" />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="confirmation" class="required"><em>*</em><?php echo $this->__('Confirm Password') ?></label>
+                        <div class="input-box">
+                            <input type="password" name="confirmation" title="<?php echo $this->__('Confirm Password') ?>" id="confirmation" class="input-text required-entry validate-cpassword" />
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="buttons-set">
+            <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+            <button type="submit" title="<?php echo $this->__('Register') ?>" class="button"><span><span><?php echo $this->__('Register') ?></span></span></button>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    //< ![CDATA[
+        var customForm = new VarienForm('seller-register-form');
+    //]]>
+</script>

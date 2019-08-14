@@ -1,0 +1,43 @@
+
+<div class="seller-review-container">
+	<?php if($this->ratingCollection()->count()): ?>
+		<table class="data-table">
+			<colgroup><col>
+				<col width="1">
+				<col width="1">
+				<col width="1">
+				<col width="1">
+				<col width="1">
+			</colgroup><thead>
+				<tr class="first last">
+					<th>&nbsp;</th>
+					<th><span class="nobr a-center"><?php echo $this->__('1 star'); ?></span></th>
+					<th><span class="nobr a-center"><?php echo $this->__('2 star'); ?></span></th>
+					<th><span class="nobr a-center"><?php echo $this->__('3 star'); ?></span></th>
+					<th><span class="nobr a-center"><?php echo $this->__('4 star'); ?></span></th>
+					<th><span class="nobr a-center"><?php echo $this->__('5 star'); ?></span></th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php $count = 0; foreach($this->ratingCollection() as $rating): $count++; ?>
+				<?php $rateValue = $this->getValue($rating->getId()); ?>
+					<tr class="<?php echo ($count % 2 == 0 ? 'even': 'odd'); ?>">
+						
+						<?php if($rateValue): ?>
+							<th><?php echo $rating->getName(); ?></th>
+							<th class="rate-center" colspan="5"><?php echo $rateValue . $this->__(' star'); ?></th>
+						<?php else: ?>
+							<th><?php echo $rating->getName(); ?></th>			
+								<td><input type="radio" name="rating[<?php echo $rating->getId(); ?>]" id="<?php echo $rating->getName() . '_1'; ?>" value="1" class="radio"></td>
+								<td><input type="radio" name="rating[<?php echo $rating->getId(); ?>]" id="<?php echo $rating->getName() . '_2'; ?>" value="2" class="radio"></td>
+								<td><input type="radio" name="rating[<?php echo $rating->getId(); ?>]" id="<?php echo $rating->getName() . '_3'; ?>" value="3" class="radio"></td>
+								<td><input type="radio" name="rating[<?php echo $rating->getId(); ?>]" id="<?php echo $rating->getName() . '_4'; ?>" value="4" class="radio"></td>
+								<td><input type="radio" name="rating[<?php echo $rating->getId(); ?>]" id="<?php echo $rating->getName() . '_5'; ?>" value="5" class="radio"></td>
+						<?php endif; ?>		
+					</tr>
+					
+				<?php endforeach; ?>           
+		</tbody>
+		</table>
+	<?php endif; ?>
+</div>

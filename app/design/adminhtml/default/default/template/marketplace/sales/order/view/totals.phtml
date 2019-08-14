@@ -1,0 +1,45 @@
+
+	<table cellspacing="0" width="100%">
+		<col />
+		<col width="1" />
+		<tbody>
+			<!-- TOTAL SELLER AMOUNT -->
+			<tr>
+				<td class="label">
+					<strong><?php echo $this->escapeHtml("Total Seller Amount"); ?></strong>
+				</td>
+				<td class="emph">
+					<strong><?php echo Mage::registry('seller_total_amount'); ?></strong>
+				</td>
+			</tr>
+			<!-- TOTAL ADMIN COMISSION -->	
+			<tr>
+				<td class="label">
+					<strong><?php echo $this->escapeHtml("Total Admin Commission"); ?></strong>
+				</td>
+				<td class="emph">
+					<strong><?php echo Mage::registry('admin_commission'); ?></strong>
+				</td>
+			</tr>
+			<!-- SHIPPING TOTAL -->
+			<?php if(Mage::registry('marketplace_shipping_price')): ?>
+			<tr>
+				<td class="label">
+					<span><?php echo $this->escapeHtml("Shipping & Handling"); ?></span>
+				</td>
+				<td class="emph">
+					<strong><?php echo Mage::registry('marketplace_shipping_price'); ?></strong>
+				</td>
+			</tr>
+			<?php endif; ?>
+			<!-- GRAND TOTAL -->
+			<tr>
+				<td class="label">
+					<strong><?php echo $this->escapeHtml("Grand Total"); ?></strong>
+				</td>
+				<td class="emph">
+					<strong><?php echo Mage::registry('grand_total'); ?></strong>
+				</td>
+			</tr>
+		</tbody>
+	</table>

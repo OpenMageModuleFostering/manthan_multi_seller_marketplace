@@ -1,0 +1,8 @@
+
+<?php foreach($this->ratingCollection() as $rating): ?>
+		<strong class="rating-label"><?php echo $rating->getName(); ?></strong>
+		<div class="ratings">
+			<div class="empty-stars"></div>
+			<div class="full-stars" style="width:<?php echo $this->getValue($rating->getId()) * 20 ?>%"></div>
+		</div><br/>
+<?php endforeach; ?>	

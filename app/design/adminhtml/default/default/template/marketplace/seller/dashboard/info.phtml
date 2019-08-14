@@ -1,0 +1,54 @@
+
+
+<?php
+ $weekSales = $this->weekSales();
+ $monthSales = $this->monthSales();
+ $lifeTimeSales = $this->lifetimeSales();
+ $PendingAmount = $this->getSellerPendingAmount();
+ ?>
+<div class="content-header">
+    <h3 class="head-system-account"><?php echo $this->__('Orders'); ?></h3>    
+</div>
+	<div class="entry-edit box-left">
+		<div class="entry-edit-head" style='background:#8CC343;'><h4>Lifetime Sales</h4></div>
+		<fieldset class="a-center bold">
+			<span style="font-size:18px;" class="nowrap">
+				<span class="price"><?php echo Mage::helper('core')->currency($lifeTimeSales); ?></span>
+				<span style="font-size:14px; color:#686868;"></span>
+			</span>
+		</fieldset>
+	</div>
+	<div class="box-right">
+		<div class="entry-edit">
+			<div class="entry-edit-head" style="background:#BF824D"><h4>Pending Amount</h4></div>
+			<fieldset class="a-center bold">
+				<span style="font-size:18px;" class="nowrap">
+					<span class="price"><?php echo  Mage::helper('core')->currency($PendingAmount); ?></span>
+					<span style="font-size:14px; color:#686868;"></span>
+				</span>
+			</fieldset>
+		</div>
+	</div>
+
+<div class="box-left">
+	<div class="entry-edit">
+		<div class="entry-edit-head"><h4>Week Sales</h4></div>
+		<fieldset class="a-center bold">
+			<span style="font-size:18px;" class="nowrap">
+				<span class="price"><?php echo Mage::helper('core')->currency($weekSales);?></span>
+				<span style="font-size:14px; color:#686868;"></span>
+			</span>
+		</fieldset>
+	</div>
+</div>
+<div class="box-right">
+	<div class="entry-edit">
+		<div class="entry-edit-head"><h4>Month Sales</h4></div>
+		<fieldset class="a-center bold">
+			<span style="font-size:18px;" class="nowrap">
+				<span class="price"><?php echo Mage::helper('core')->currency($monthSales);?></span>
+				<span style="font-size:14px; color:#686868;"></span>
+			</span>
+		</fieldset>
+	</div>
+</div>

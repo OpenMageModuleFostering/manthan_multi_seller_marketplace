@@ -1,0 +1,36 @@
+<?php $review = $this->getReview(); ?>
+<?php if(is_null($review)): ?>
+	<fieldset class="">
+		<ul class="form-list">
+			<li>
+				<label for="nickname_field" class="required"><em>*</em><?php echo $this->__('Subject');?></label>
+				<div class="input-box">
+					<input type="text" name="review[subject]" id="subject_field" class="input-text required-entry">
+				</div>
+			</li>
+			<li>
+				<label for="review_field" class="required"><em>*</em><?php echo $this->__('Review');?></label>
+				<div class="input-box">
+					<textarea name="review[description]" id="description_field" cols="5" rows="3" class="required-entry"></textarea>
+				</div>
+			</li>
+		</ul>
+	</fieldset>
+<?php else: ?>
+	<fieldset class="">
+		<ul class="form-list">
+			<li>
+				<p>&nbsp;</p>
+				<div class="input-box">
+					<span><b><?php echo $review->getSubject(); ?></b></span>
+				</div>
+			</li>
+			<li>
+				<div class="input-box">
+					<span><?php echo $review->getDescription(); ?></span>
+				</div>
+				<p>&nbsp;</p>
+			</li>
+		</ul>
+	</fieldset>
+<?php endif; ?>

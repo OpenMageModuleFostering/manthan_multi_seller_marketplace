@@ -1,0 +1,35 @@
+<?php $collection = $this->getCollection();?>
+<div class="seller-review-table">
+<?php echo $this->getToolbarHtml(); ?>
+<?php if($collection->getSize()): ?>
+<div class="seller-comments">
+	<?php foreach($collection as $review): ?>
+	<div class="reviews-section">
+		<div class="review-float"> 
+			<div class="date-line"><?php echo $this->formatDate($review->getCreatedDate(),'medium', false) ?> </div> 
+			<div class="rating-line-block"> 
+				<?php $rating = $this->getRating($review->getShipmentItemId()); ?>
+				<?php  foreach($rating as $rate): ?>	
+				<div class="rating-line">
+					<div class="rating-contain"><?php echo $rate['name']; ?></div>
+					<div class="rating-contain">
+						<div class="blank-rating-img"></div>
+						<div class="fill-rating-img" style="width: <?php echo ($rate['value']*10)*2; ?>%"></div>						
+					</div>
+				</div>			
+				<?php endforeach;  ?>	
+			</div>
+		</div>
+		<div class='review-float'>
+			<div class="subject-line"><h4><?php echo ucfirst($review->getSubject()); ?></h4></div>
+			<div class="description-line"><?php echo $review->getDescription(); ?></div> 
+		</div>
+	</div>
+	<?php endforeach; ?>	
+</div>
+<script type="text/javascript">//decorateTable('my-custom-table');</script>
+<?php echo $this->getToolbarHtml(); ?>
+<?php else: ?>
+    <p><?php echo $this->__('<h2>There are no reviews available for this seller<h2>.'); ?></p>
+<?php endif ?>
+</div>

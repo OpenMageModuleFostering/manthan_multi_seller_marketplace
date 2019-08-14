@@ -1,0 +1,60 @@
+<config>
+	<modules>
+		<Manthan_Marketplaceproductshipping>
+          <version>1.0.0</version>
+		</Manthan_Marketplaceproductshipping>
+    </modules>
+    <global>
+        <models>
+            <marketplaceproductshipping>
+                <class>Manthan_Marketplaceproductshipping_Model</class>
+                <resourceModel>marketplaceproductshipping_mysql4</resourceModel>
+            </marketplaceproductshipping>
+            <marketplaceproductshipping_mysql4>
+                <class>Manthan_Marketplaceproductshipping_Model_Mysql4</class>
+                <entities>
+                    <marketplaceproductshipping>
+                        <table>marketplaceproductshipping</table>
+                    </marketplaceproductshipping>
+                </entities>
+            </marketplaceproductshipping_mysql4>
+        </models>
+        <resources>
+            <marketplaceproductshipping_setup>
+                <setup>
+                    <module>Manthan_Marketplaceproductshipping</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </marketplaceproductshipping_setup>
+            <marketplaceproductshipping_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </marketplaceproductshipping_write>
+            <marketplaceproductshipping_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </marketplaceproductshipping_read>
+        </resources>
+        <helpers>
+            <marketplaceproductshipping>
+                <class>Manthan_Marketplaceproductshipping_Helper</class>
+            </marketplaceproductshipping>
+        </helpers>
+    </global>
+    <default>
+		<carriers>
+			<marketplaceproductshipping>
+	           <active>1</active>
+	           <model>marketplaceproductshipping/carrier_marketplaceproductshipping</model>
+	           <title>Carrier Title</title>
+	           <name>Manthan Marketplace Shipping Per Product</name>
+	           <price>5.00</price>
+	           <specificerrmsg>This shipping method is currently unavailable. If you would like to ship using this shipping method, please contact us.</specificerrmsg>
+			</marketplaceproductshipping>
+	    </carriers>
+    </default>
+</config>

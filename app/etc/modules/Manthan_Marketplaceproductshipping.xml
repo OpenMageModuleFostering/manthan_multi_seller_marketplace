@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Manthan_Marketplaceproductshipping>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Manthan_Marketplaceproductshipping>
+    </modules>
+</config>

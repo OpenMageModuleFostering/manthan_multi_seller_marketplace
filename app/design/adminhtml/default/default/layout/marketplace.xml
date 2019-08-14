@@ -1,0 +1,36 @@
+<layout version="1.0.0">
+    <default>
+    	<reference name="head">		
+			<action method="addItem"><type>skin_css</type><name>marketplace/css/style.css</name></action>
+			<reference name="header">
+				<action method="setTemplate">
+					<template>marketplace/page/header.phtml</template>
+				</action> 
+			</reference>
+		</reference>	
+    </default>
+	<admin_marketplace_adminhtml_login_index>
+	   <block type="core/text_list" name="root" output="toHtml">
+            <block type="adminhtml/template" name="content" template="marketplace/login.phtml">
+                <block type="core/text_list" name="form.additional.info" />
+            </block>
+        </block>
+	</admin_marketplace_adminhtml_login_index>
+	<adminhtml_catalog_product_new>
+        <reference name="product_edit">
+            <action method="setTemplate">
+                <template>marketplace/catalog/product/edit.phtml</template>
+            </action> 
+        </reference>
+    </adminhtml_catalog_product_new>
+    <adminhtml_catalog_product_edit>
+        <reference name="product_edit">
+            <action method="setTemplate">
+                <template>marketplace/catalog/product/edit.phtml</template>
+            </action>
+        </reference>
+    </adminhtml_catalog_product_edit>
+	<admin_marketplace_adminhtml_order_view>
+	<!-- for future work -->
+	</admin_marketplace_adminhtml_order_view>
+</layout>

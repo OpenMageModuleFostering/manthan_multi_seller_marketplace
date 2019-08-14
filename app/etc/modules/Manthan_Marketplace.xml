@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Manthan_Marketplace>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Manthan_Marketplace>
+    </modules>
+</config>

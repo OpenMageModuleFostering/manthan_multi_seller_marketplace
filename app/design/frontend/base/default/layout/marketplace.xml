@@ -1,0 +1,61 @@
+<layout version="1.0.0">
+	<default>
+        <reference name="head">			
+            <action method="addCss">
+                <stylesheet>marketplace/css/style.css</stylesheet>
+            </action>
+        </reference>
+	</default>
+	<adminhtml>
+        <reference name="head">			
+            <action method="addCss">
+                <stylesheet>marketplace/css/style.css</stylesheet>
+            </action>
+        </reference>
+	</adminhtml>
+	<catalog_product_view>
+		<reference name="product.info">
+			<action method="setTemplate">
+				<template>marketplace/seller/catalog/product/view.phtml</template>
+			</action>
+		</reference>
+	</catalog_product_view>
+	<marketplace_seller_create>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>            
+        </reference>
+        <reference name="content">
+            <block type="marketplace/register" name="marketplace.seller.register" template="marketplace/register.phtml" />
+        </reference>
+    </marketplace_seller_create>
+	<sales_order_view>
+		<reference name="head">			
+          <action method="addItem"><type>skin_js</type><name>marketplace/js/marketplace.js</name></action>
+		</reference>
+		<reference name="order_items">
+			<action method="addItemRender">
+				<type>default</type>
+				<block>sales/order_item_renderer_default</block>
+				<template>marketplace/sales/order/items/renderer/default.phtml</template>
+			</action>
+			<action method="addItemRender">
+				<type>grouped</type>
+				<block>sales/order_item_renderer_grouped</block>
+				<template>marketplace/sales/order/items/renderer/default.phtml</template>
+			</action>
+		</reference>
+	</sales_order_view>
+	 <marketplace_seller_view>
+	  <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+			<block type="marketplace/seller_profile" name="marketplace.seller.profile" template="marketplace/seller/profile.phtml" />
+            <block type="marketplace/seller_profile_review" name="marketplace.seller.review" template="marketplace/seller/profile/review.phtml" />
+        </reference>
+    </marketplace_seller_view>
+</layout>

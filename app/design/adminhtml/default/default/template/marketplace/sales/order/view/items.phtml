@@ -1,0 +1,53 @@
+
+<?php $totalAdminCommission = 0; $grandTotal = 0;$sellerTotal = 0;?>
+
+<div class="grid np">
+    <div class="hor-scroll">
+        <table cellspacing="0" class="data order-tables">
+            <col />
+            <col width="1" />
+            <col width="1" />
+            <col width="1" />
+            <col width="1" />
+            <col width="1" />
+            <col width="1" />
+            <col width="1" />
+            <thead>
+                <tr class="headings">
+                    <th><?php echo $this->helper('marketplace')->__('Product') ?></th>
+                    <th><?php echo $this->helper('marketplace')->__('Commission Amount of Admin') ?></th>
+                    <th><?php echo $this->helper('marketplace')->__('Seller Amount') ?></th>
+                    <th><span class="nobr"><?php echo $this->helper('marketplace')->__('Original Price') ?></span></th>
+                    <th class="a-center"><?php echo $this->helper('marketplace')->__('Qty') ?></th>
+                    <th class="last"><span class="nobr"><?php echo $this->helper('marketplace')->__('Row Total') ?></span></th>
+                </tr>
+            </thead>        
+            <?php $_items = $this->getItemsCollection();?>
+            <?php $i = 0; foreach ($_items as $_item): ?>
+                <?php if ($_item->getParentItem()) continue; else $i++; ?>
+                <tbody class="<?php echo $i % 2 ? 'even' : 'odd'; ?>">
+                  <?php echo $this->getItemHtml($_item); ?>	
+                    <?php
+                    $totalAdminCommission	+= $this->getAdminCommission($_item);
+					$sellerTotal			+= $this->getSellerItemAmount($_item);
+                    $grandTotal				+=  round($_item->getRowTotalInclTax(), 2);
+                    ?>
+                </tbody>
+            <?php endforeach; ?>
+            <?php 
+			
+			$order = Mage::registry('current_order');
+			if($order->getShippingMethod() == 'marketplaceproductshipping_marketplaceproductshipping')	
+			{
+				Mage::register('marketplace_shipping_price', Mage::helper('marketplace')->getSellerPriceFormatAttribute($order,$strong = false, $separator = '<br/>'));
+				$shippingPrice = Mage::helper('marketplace')->getSellerPriceAttribute($order);
+				$grandTotal += $shippingPrice;
+			}
+			Mage::register('admin_commission',$order->formatPrice($totalAdminCommission));
+            Mage::register('seller_total_amount',$order->formatPrice($sellerTotal));
+            Mage::register('grand_total',$order->formatPrice($grandTotal));
+            ?>
+        </table>
+    </div>
+</div>
+<br />

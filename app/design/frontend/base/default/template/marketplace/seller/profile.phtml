@@ -1,0 +1,86 @@
+
+<?php
+$seller = $this->sellerProfile();
+$country = Mage::getModel('directory/country')->loadByCode($seller['country']);
+?>
+
+<div class="seller-profile">
+	<div class="seller-top-panel">
+		<ul>
+			<li>
+				<div class="seller-profile-image">
+					<img src="<?php echo Mage::helper('marketplace')->getImagePath($seller['image']); ?>" height="140" width="140">
+				</div>
+			</li>
+			<li class="shop-info">
+				<div class="shopname">
+					<h2><?php echo $seller['shop_name']; ?></h2>
+				</div>
+				<div class="shop-description">
+					<p><?php echo $seller['shop_description']; ?></p>
+				</div>
+				<div class="shop-contact">
+					<span><?php echo $this->__('<b>Phone</b>: %s',$seller['telephone']);?></span>
+				</div>
+				<div class="seller-profile-contact">
+					<span><?php echo $this->__('<b>Email</b>: %s',$seller['email']); ?></span>
+				</div>
+				<div class="shop-location">
+					<span><?php echo $this->__('<b>Country</b>: %s',$country->getName());?></span>
+				</div>
+			</li>
+			<li class="summary-overview">
+				<h3><?php echo $this->__('Rating Conclusion') ?></h3>
+				<?php foreach($this->ratingOverview() as $rate):?>
+					<div class="rating-list">
+						<?php $ratingName =  $this->getRatingName($rate['rating_id']); ?>
+						<?php $avgPercentage = ($rate['sub_total']*100)/($rate['rating_count']*5); ?>
+						<?php $rating = $rate['sub_total']/$rate['rating_count'] ; ?>
+						<?php $ratingTitle = $this->__("Rating: ").round($rating,1)."of 5"; ?>
+						<div class="rating-stars">
+							<div class="blank-stars"></div>
+							<div title="<?php echo $ratingTitle; ?>"class="fill-stars" style="width:<?php echo round($avgPercentage,2); ?>%"></div>
+						</div>
+						<div class="rating-name"><?php echo $ratingName; ?></div>
+					</div>
+			<?php endforeach; ?>		
+			</li>
+			<li>
+				<?php $sum = 0;foreach($this->getReviewStars() as $rate) $sum += $rate['value_count'];?>
+				<?php $positive = array(5,4); $rate = $this->getPositivePercentage($positive);?> 
+				<div class="rating-linegraph">
+					<div class="avgRatingSection sellerrating">
+						<?php $positiveTotal = count($rate) == 0 ? 0 : ($rate['positive_total']/$sum)*100 ?>
+						<div class="rating-percentage">
+							<span class="positive-average"><?php echo round($positiveTotal)."%"; ?></span> 
+							<span class="positve-label"><?php echo $this->__('Positive') ?></span>
+							</div> 
+							<span><?php echo $this->__('Based on %d ratings',$sum) ?></span>
+						</div>
+					<div class="seller-rating-bar seller-rating">
+						<ul>
+						<?php $count=5;for($count=5;$count>=1;$count--):
+							$rate =  $this->getReviewStar($count);
+							
+							$avg = ($rate == null ? 0 : (($rate['value_count']/$sum)*100));
+							?>
+							<li>
+								<span><?php echo $count.$this->__('star') ?> </span>
+								<div class="blank-ratingbar">
+									<div class="fill-bar" style="width:<?php echo $avg;  ?>%"></div>
+								</div>
+								<span class="rate-vote"><?php echo $rate == NULL ? 0 : $rate['value_count']; ?></span>
+							</li>
+					<?php endfor; ?>
+							
+						</ul>
+					</div>
+					<div class="seller-rate-type seller-rating">
+						<div class="border type-positive"><?php echo $this->__('Positive'); ?></div>
+						<div class="border type-neutral"><?php echo $this->__('Neutral');?></div>
+						<div class="border type-negative"><?php echo $this->__('Negative') ;?></div>
+					</div>
+				</div>
+			</li>
+	</div>
+</div>
