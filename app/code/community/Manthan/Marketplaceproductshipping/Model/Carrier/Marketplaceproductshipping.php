@@ -30,19 +30,19 @@ class Manthan_Marketplaceproductshipping_Model_Carrier_Marketplaceproductshippin
 									->addFieldToFilter('user_id',$userId);
 						$sellerCountryCode = $sellerCollection->getFirstItem()->getCountry();
 						
-						if($sellerCountryCode == $destinationCountryCode)
+						if($sellerCountryCode == $destinationCountryCode && $product->getDomesticShippingCost() != '' )
 						{
-							$shippingPrice += $product->getDomesticShippingCost() * $item->getQty();
+							$shippingPrice += ($product->getDomesticShippingCost() * $item->getQty());
 						}
-						else if(empty(trim($product->getDomesticShippingCost()))&& empty(trim($product->getInternationalShippingCost())))
+						else if($product->getDomesticShippingCost() == '' && $product->getInternationalShippingCost()=='')
 						{
 							$shippingPrice += ($item->getQty() * $this->getConfigData('price'));
 						}
-						else if(empty(trim($product->getInternationalShippingCost()))&& ($product->getDomesticShippingCost() || $product->getDomesticShippingCost() == 0 ))
+						else if($product->getInternationalShippingCost()=='' && ($product->getDomesticShippingCost() || $product->getDomesticShippingCost() == 0 ))
 						{
 							$shippingPrice += $product->getDomesticShippingCost() * $item->getQty();
 						}
-						else if(empty(trim($product->getDomesticShippingCost()))&& ($product->getInternationalShippingCost() || $product->getInternationalShippingCost() == 0  ))
+						else if($product->getDomesticShippingCost()=='' && ($product->getInternationalShippingCost() || $product->getInternationalShippingCost() == 0  ))
 						{
 							$shippingPrice += $product->getInternationalShippingCost() * $item->getQty();
 						}
@@ -57,15 +57,15 @@ class Manthan_Marketplaceproductshipping_Model_Carrier_Marketplaceproductshippin
 							{
 								$shippingPrice += $product->getDomesticShippingCost() * $item->getQty();
 							}
-							else if(empty(trim($product->getDomesticShippingCost()))&& empty(trim($product->getInternationalShippingCost())))
+							else if($product->getDomesticShippingCost()=='' && $product->getInternationalShippingCost()=='')
 							{
 								$shippingPrice += ($item->getQty() * $this->getConfigData('price'));
 							}
-							else if(empty(trim($product->getInternationalShippingCost()))&& ($product->getDomesticShippingCost() || $product->getDomesticShippingCost() == 0 ))
+							else if($product->getInternationalShippingCost()=='' && ($product->getDomesticShippingCost() || $product->getDomesticShippingCost() == 0 ))
 							{
 								$shippingPrice += $product->getDomesticShippingCost() * $item->getQty();
 							}
-							else if(empty(trim($product->getDomesticShippingCost()))&& ($product->getInternationalShippingCost() || $product->getInternationalShippingCost() == 0  ))
+							else if($product->getDomesticShippingCost()=='' && ($product->getInternationalShippingCost() || $product->getInternationalShippingCost() == 0  ))
 							{
 								$shippingPrice += $product->getInternationalShippingCost() * $item->getQty();
 							}
@@ -95,10 +95,3 @@ class Manthan_Marketplaceproductshipping_Model_Carrier_Marketplaceproductshippin
     }
 
 }
-
-
-
-
-
-
-

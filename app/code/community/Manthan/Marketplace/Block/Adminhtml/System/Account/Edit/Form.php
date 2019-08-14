@@ -141,28 +141,16 @@ class Manthan_Marketplace_Block_Adminhtml_System_Account_Edit_Form extends Mage_
 					'value' =>$sellerModel->getFirstItem()->getImage()
 				));
 				
-			 $fieldset->addField('admin_commission_by_percentage', 'text', array(
-					'name' => 'admin_commission_by_percentage',
+			$fieldset->addField('admin_commission_by_percentage', 'label', array(
 					'label' => Mage::helper('adminhtml')->__('Commission (in %)'),
-					'title' => Mage::helper('adminhtml')->__('Commission (in %)'),
-					'required' => true,
-					'style' => 'display:none',
-					'value' => $sellerModel->getFirstItem()->getAdminCommissionByPercentage(),
-					'after_element_html' => '<b>' . $sellerModel->getFirstItem()->getAdminCommissionByPercentage() . '</b>',
-					)
-				);
-			
-			$fieldset->addField('admin_total_earn', 'text', array(
-					'name'  => 'admin_total_earn',
-					'label' => Mage::helper('adminhtml')->__('Total Admin Earn From Your Sale '),
-					'title' => Mage::helper('adminhtml')->__('Total Admin Earn From Your Sale'),
-					'disabled' => true,
-					'style' => 'display:none',
-					'value' => $sellerModel->getFirstItem()->getAdminTotalEarn(),
-					'after_element_html' => '<b>' . $sellerModel->getFirstItem()->getAdminTotalEarn() . '</b>',
-
-				)
-			);
+					'value' => Mage::helper('core')->currency($sellerModel->getFirstItem()->getAdminCommissionByPercentage(), true, false),
+				));
+				
+			$fieldset->addField('admin_total_earn', 'label', array(
+					'label' => Mage::helper('adminhtml')->__('Total Admin Earn'),
+					'value' => Mage::helper('core')->currency($sellerModel->getFirstItem()->getAdminTotalEarn(), true, false),
+				));
+				
 		}
 		/* END SHOP INFORMATION */
 		

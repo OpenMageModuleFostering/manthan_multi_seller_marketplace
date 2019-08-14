@@ -102,7 +102,22 @@ class Manthan_Marketplace_Block_Adminhtml_Review_Grid extends Mage_Adminhtml_Blo
             'options' => array(0=>'Pending',1=>'Approved',2=>'Not Approved'),
         ));
 
-
+		$this->addColumn('action', array(
+            'header' => Mage::helper('adminhtml')->__('Action'),
+            'width' => '50px',
+            'type' => 'action',
+            'getter' => 'getId',
+            'actions' => array(
+                array(
+                    'caption' => Mage::helper('adminhtml')->__('Edit'),
+                    'url' => array('base' => '*/*/edit'),
+                    'field' => 'id'
+                )
+            ),
+            'filter' => false,
+            'sortable' => false,
+            'is_system' => true,
+        ));
         return parent::_prepareColumns();
     }
 

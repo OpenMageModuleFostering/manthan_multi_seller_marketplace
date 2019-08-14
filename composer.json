@@ -1,7 +1,7 @@
 {
     "name": "OpenMageModuleFostering/Manthan_Multi_Seller_Marketplace",
     "type": "magento-module",
-    "license": "OSL",
+    "license": "OSL-v3.0",
     "homepage": "",
     "description": "Manthan Marketplace will convert your Magento Store into multi seller marketplace.",
     "authors": [

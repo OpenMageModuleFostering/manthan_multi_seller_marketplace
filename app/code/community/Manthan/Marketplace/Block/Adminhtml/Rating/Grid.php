@@ -40,6 +40,23 @@ class Manthan_Marketplace_Block_Adminhtml_Rating_Grid extends Mage_Adminhtml_Blo
             ),
         ));
 		
+		$this->addColumn('action', array(
+            'header' => Mage::helper('adminhtml')->__('Action'),
+            'width' => '50px',
+            'type' => 'action',
+            'getter' => 'getId',
+            'actions' => array(
+                array(
+                    'caption' => Mage::helper('adminhtml')->__('Edit'),
+                    'url' => array('base' => '*/*/edit'),
+                    'field' => 'id'
+                )
+            ),
+            'filter' => false,
+            'sortable' => false,
+            'is_system' => true,
+        ));
+		
         return parent::_prepareColumns();
     }
 

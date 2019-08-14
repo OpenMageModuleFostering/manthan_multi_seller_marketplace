@@ -1,8 +1,8 @@
 <?php
-
-class Manthan_Marketplace_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget_Grid {    
-
-public function __construct(){
+class Manthan_Marketplace_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget_Grid 
+{
+	public function __construct()
+	{
         parent::__construct();
         $this->setId('orderGrid');
         $this->setDefaultSort('entity_id');

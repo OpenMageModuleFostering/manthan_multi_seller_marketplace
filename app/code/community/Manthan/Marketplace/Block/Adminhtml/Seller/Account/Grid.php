@@ -68,22 +68,26 @@ class Manthan_Marketplace_Block_Adminhtml_Seller_Account_Grid extends Mage_Admin
             'width' => '50px',
         ));
 		
+		$currencyCode = Mage::app()->getStore()->getCurrentCurrencyCode();
+		
 		$this->addColumn('admin_commission_by_percentage', array(
             'header' => Mage::helper('adminhtml')->__('Admin Commision(%)'),
+			'type'      => 'currency',
             'index' => 'admin_commission_by_percentage',
             'width' => '20px',
+			'currency_code'  => $currencyCode,
+			'filter'	=> false,
         ));
 		
-		$currencyCode = Mage::app()->getStore()->getCurrentCurrencyCode();
-		$this->addColumnAfter('admin_total_earn', array(
+		
+		$this->addColumn('admin_total_earn', array(
 		   'header' => Mage::helper('adminhtml')->__('Admin Earn'),
 			'type'      => 'currency',
 			'currency_code'  => $currencyCode,
 			'index'     => 'admin_total_earn',
 			'filter'	=> false,
 			'width' => '100px',
-
-		), 'admin_commission_by_percentage');
+		));
 		
         $this->addColumn('telephone', array(
             'header' => Mage::helper('adminhtml')->__('Telephone'),
@@ -99,6 +103,23 @@ class Manthan_Marketplace_Block_Adminhtml_Seller_Account_Grid extends Mage_Admin
             'options' => array(0=> 'Inactive',1=>'Active')
         ));
 		
+		$this->addColumn('action', array(
+            'header' => Mage::helper('adminhtml')->__('Action'),
+            'width' => '50px',
+            'type' => 'action',
+            'getter' => 'getId',
+            'actions' => array(
+                array(
+                    'caption' => Mage::helper('adminhtml')->__('Edit'),
+                    'url' => array('base' => '*/*/edit'),
+                    'field' => 'id'
+                )
+            ),
+            'filter' => false,
+            'sortable' => false,
+            'is_system' => true,
+			'totals_label' => ''
+        ));
         return parent::_prepareColumns();
     }
 

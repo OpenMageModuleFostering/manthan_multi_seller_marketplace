@@ -162,7 +162,7 @@ class Manthan_Marketplace_Block_Adminhtml_Seller_Account_Edit_Tab_Form extends M
 					)
 				);				
 			$fieldset->addField('admin_total_earn', 'label', array(
-					'label' => Mage::helper('adminhtml')->__('Total Admin Earn From Your Sale'),
+					'label' => Mage::helper('adminhtml')->__('Total Admin Earn'),
 					'value' => Mage::helper('core')->currency($sellerModel->getAdminTotalEarn(), true, false)
 				));
 			$fieldset->addField('total_vendor_earn', 'label', array(
