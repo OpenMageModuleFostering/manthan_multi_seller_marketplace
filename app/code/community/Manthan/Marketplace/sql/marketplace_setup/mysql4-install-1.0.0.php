@@ -232,14 +232,7 @@ $installer->getConnection()
 			'nullable' => false,
 			'default' => 0,
 			'comment' => 'Commission of Order Item by Admin'
-	));
-/*$installer->getConnection()
-	->addColumn($installer->getTable('sales/order_item'),'seller_payment_status',array(
-			'type' => Varien_Db_Ddl_Table::TYPE_INTEGER,
-			'nullable' => false,
-			'default' => 0,
-			'comment' => 'Seller Payment Status'
-	));*/	
+	));	
 $tableName = $installer->getTable('marketplace/payment');
 if ($installer->getConnection()->isTableExists($tableName) != true) 
 {

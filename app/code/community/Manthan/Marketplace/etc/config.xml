@@ -1,7 +1,7 @@
 <config>
     <modules>
         <Manthan_Marketplace>
-            <version>1.0.1</version>
+            <version>1.1.1</version>
         </Manthan_Marketplace>
     </modules> 
     <global>
@@ -200,7 +200,7 @@
             </adminhtml>
         </routers>
     </admin>
-	 <adminhtml>
+	<adminhtml>
 		<layout>
             <updates>
                 <marketplace>

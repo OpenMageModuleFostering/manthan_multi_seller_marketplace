@@ -311,7 +311,7 @@ class Manthan_Marketplace_Model_Pdf_Invoice extends Mage_Core_Model_Abstract {
 	
 	protected function _getProductOptions($page,$options,$y,$font)
 	{
-		if($options['attributes_info']){ 
+		if(isset($options['attributes_info'])){ 
 			$page->setFont($font, 8); 
 			foreach($options['attributes_info'] as $attribute)
 				$page->drawText(  $attribute['label'] . ":" . $attribute['value'] , 35, $y-15, 'UTF-8');		

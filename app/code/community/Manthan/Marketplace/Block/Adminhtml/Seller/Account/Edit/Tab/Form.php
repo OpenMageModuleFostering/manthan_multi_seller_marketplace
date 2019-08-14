@@ -85,7 +85,8 @@ class Manthan_Marketplace_Block_Adminhtml_Seller_Account_Edit_Tab_Form extends M
 					'value' => $sellerModel->getShopName(),
 				)
 			);
-			if($userModel->getData())
+			
+			if($userModel->getId())
 			{
 				$fieldset->addField('link', 'link', array(
 				  'label'     => Mage::helper('adminhtml')->__('Link'),

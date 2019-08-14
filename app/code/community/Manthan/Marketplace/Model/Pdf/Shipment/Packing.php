@@ -211,8 +211,6 @@ class Manthan_Marketplace_Model_Pdf_Shipment_Packing extends Mage_Core_Model_Abs
 			$topMargin    = 0;
             $methodStartY = $this->y;
             $this->y     -= 15;
-
-           
 		 if (!$order->getIsVirtual()) {
 					/* Shipping Address */
 					$shippingAddress = $this->_formatAddress($order->getShippingAddress()->format('pdf'));
@@ -295,7 +293,7 @@ class Manthan_Marketplace_Model_Pdf_Shipment_Packing extends Mage_Core_Model_Abs
 	}
 	protected function _getProductOptions($page,$options,$y,$font)
 	{
-		if($options['attributes_info']){ 
+		if(isset($options['attributes_info'])){ 
 			$page->setFont($font, 8); 
 			foreach($options['attributes_info'] as $attribute)
 				$page->drawText(  $attribute['label'] . ":" . $attribute['value'] , 35, $y-15, 'UTF-8');		

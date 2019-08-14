@@ -27,6 +27,8 @@ class Manthan_Marketplace_Block_Adminhtml_Seller_Dashboard_Info extends Mage_Adm
 					->columns('SUM(admin_amount) as pending_amount')
 					->group('seller_id');
 				$sellerArray = $collection->getData();
+				if(empty($sellerArray))
+				   return round(0,2);	
 			return round($sellerArray[0]['pending_amount'],2);		
 		}
 		return 0;

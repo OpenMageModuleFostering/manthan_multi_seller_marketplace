@@ -64,9 +64,12 @@ class Manthan_Marketplace_Model_Observer {
 				
 				if($marketplacePerProductShippingMethod == 'marketplaceproductshipping_marketplaceproductshipping')
 				{
-					$shippingPrice = $product->getInternationalShippingCost() * $quoteItem->getQty();
-					if($country == $this->getCurrentShippingObject()->getCountryId())
-							$shippingPrice = $product->getDomesticShippingCost() * $quoteItem->getQty();
+					$shippingPrice = Mage::getStoreConfig('carriers/marketplaceproductshipping/price') * $quoteItem->getQty();
+					if($country == $this->getCurrentShippingObject()->getCountryId() && $product->getDomesticShippingCost()){
+						$shippingPrice = $product->getDomesticShippingCost() * $quoteItem->getQty();
+					}else if($country != $this->getCurrentShippingObject()->getCountryId() && $product->getInternationalShippingCost()){
+						$shippingPrice = $product->getInternationalShippingCost() * $quoteItem->getQty();
+					}
 					$orderItem->setSellerPerProductShipping($shippingPrice);
 				}
 				
@@ -225,11 +228,21 @@ class Manthan_Marketplace_Model_Observer {
 				$sellerId = $sellerCollection->getFirstItem()->getId();
 				$orderItemsArray[$seller->getUserId()]['order_id'] = $orderIncrementId;
 				$orderItemsArray[$seller->getUserId()]['seller_id'] = $sellerId;
-				
+				if(!isset($orderItemsArray[$seller->getUserId()]['order_total']))
+				{
+					$orderItemsArray[$seller->getUserId()]['order_total'] =  0;
+				}
+				if(!isset($orderItemsArray[$seller->getUserId()]['marketplace_shipping']))
+				{
+					$orderItemsArray[$seller->getUserId()]['marketplace_shipping'] = 0;
+				}
+				$orderItemsArray[$seller->getUserId()]['order_total'] +=  $_item->getRowTotalInclTax();
 				$orderItemsArray[$seller->getUserId()]['seller_order_total'] +=  $sellerAmount;
 				if($order->getShippingMethod() == 'marketplaceproductshipping_marketplaceproductshipping')	
 				{ 	$shippingPrice = Mage::getModel('marketplace/seller')->getSellerShippingPrice($order,$_item->getSellerId());
 					$orderItemsArray[$seller->getUserId()]['seller_order_total'] +=$shippingPrice;
+					$orderItemsArray[$seller->getUserId()]['order_total'] +=$shippingPrice;
+					$orderItemsArray[$seller->getUserId()]['marketplace_shipping'] +=$shippingPrice;
 				}
 			}
 		}
@@ -245,7 +258,13 @@ class Manthan_Marketplace_Model_Observer {
 			$seller_order = '<table cellspacing="0" cellpadding="0" border="0" width="700" style="border: 1px solid #EAEAEA;">';
 			$seller_order .= $head;
 			$seller_order .= $value['order_items'];
-			$seller_order .= $value['seller_order_total'];
+			$seller_order .= '<tfoot>';
+			if($order->getShippingMethod() == 'marketplaceproductshipping_marketplaceproductshipping')	
+			{
+				$seller_order .= '<tr><td colspan="3"></td><td align="left" style="font-size: 12px; padding: 3px 9px;">Shipping and Handling charges: </td><td align="left" valign="top" style="font-size: 11px; padding: 3px 9px; border-bottom: 1px dotted #CCCCCC;">'.$order->formatPrice($value['marketplace_shipping']).'</td></tr>';
+			}
+			$seller_order .= '<tr><td colspan="3"></td><td align="left" style="font-size: 12px; padding: 3px 9px;">Grand Total: </td><td align="left" valign="top" style="font-size: 11px; padding: 3px 9px; border-bottom: 1px dotted #CCCCCC;">'.$order->formatPrice($value['order_total']).'</td></tr>';
+			$seller_order .="</tr></tfoot>";
 			$seller_order .= '</table>';
 			$vars['seller_order_items'] = $seller_order;
 			$vars['seller_name'] = $value['seller_name'];

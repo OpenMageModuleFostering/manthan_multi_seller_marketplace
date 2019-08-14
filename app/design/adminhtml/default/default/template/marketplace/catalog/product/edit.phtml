@@ -1,4 +1,3 @@
-
 <?php
 /**
  * Template for Mage_Adminhtml_Block_Catalog_Product_Edit
@@ -28,13 +27,13 @@
 <?php $seller = Mage::getModel('marketplace/seller')->isSeller(); ?>
 <?php $type = Mage::app()->getRequest()->getParam('type'); ?>
 <?php $product_state = Mage::app()->getRequest()->getActionName(); ?>
-<?php $product_status = intval(Mage::getStoreConfig('marketplace/seller/product_status')) - 1; ?>
+<?php $product_status = intval(Mage::getStoreConfig('marketplace/seller/product_status')); ?>
+
 <?php if($seller) :?>
 if($('product_status') != null)    
-    { 
+    {
 	 <?php if( $product_state == 'new'): ?>
-		var options = $$('select#product_status option');
-		options[<?php echo $product_status ; ?>].selected = true;
+		document.getElementById("product_status").value= <?php echo $product_status ?>;
 	<?php endif; ?>
 	$('product_status').up().up().hide();
 	}

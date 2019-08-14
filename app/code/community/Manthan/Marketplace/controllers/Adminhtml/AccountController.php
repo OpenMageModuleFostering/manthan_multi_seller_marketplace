@@ -18,7 +18,7 @@ class Manthan_Marketplace_Adminhtml_AccountController extends Mage_Adminhtml_Con
 			Mage::app()->getLayout()->createBlock('marketplace/adminhtml_seller_account_product_grid')->toHtml()
 		);
 	}
-	 public function editAction()
+	public function editAction()
     {  
         $id = $this->getRequest()->getParam('id');
         $sellerObject = Mage::getModel('marketplace/seller')->load($id);
